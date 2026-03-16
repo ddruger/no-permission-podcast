@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 90" role="img" aria-label="No Permission Podcast">
+  <defs>
+    <linearGradient id="goldRust" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#C8820A"/>
+      <stop offset="100%" stop-color="#C84A0A"/>
+    </linearGradient>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Dark background so it reads on any surface -->
+  <rect width="560" height="90" fill="#100B04"/>
+
+  <!-- ── Mic Icon ────────────────────────────────── -->
+
+  <!-- Capsule body (pill shape: rx = half-width) -->
+  <rect x="18" y="8" width="24" height="38" rx="12"
+        fill="#1A1108" stroke="url(#goldRust)" stroke-width="2.2"/>
+
+  <!-- Capsule head fill (warm glow at top) -->
+  <rect x="22" y="11" width="16" height="13" rx="7"
+        fill="#C8820A" opacity="0.55"/>
+
+  <!-- Grill lines -->
+  <line x1="23" y1="28" x2="37" y2="28" stroke="#C8820A" stroke-width="1.1" stroke-linecap="round" opacity="0.65"/>
+  <line x1="23" y1="34" x2="37" y2="34" stroke="#C8820A" stroke-width="1.1" stroke-linecap="round" opacity="0.65"/>
+  <line x1="23" y1="40" x2="37" y2="40" stroke="#C8820A" stroke-width="1.1" stroke-linecap="round" opacity="0.65"/>
+
+  <!-- Stem -->
+  <line x1="30" y1="46" x2="30" y2="72"
+        stroke="#C8820A" stroke-width="2.2" stroke-linecap="round"/>
+
+  <!-- Base -->
+  <line x1="15" y1="72" x2="45" y2="72"
+        stroke="url(#goldRust)" stroke-width="2.8" stroke-linecap="round"/>
+
+  <!-- ── Divider ────────────────────────────────── -->
+  <line x1="62" y1="10" x2="62" y2="80"
+        stroke="#C8820A" stroke-width="0.8" opacity="0.3"/>
+
+  <!-- ── Wordmark ───────────────────────────────── -->
+
+  <!-- NO -->
+  <text x="76" y="68"
+        font-family="'Bebas Neue', Impact, 'Arial Narrow', sans-serif"
+        font-size="60" letter-spacing="2" fill="#F8F4EE">NO</text>
+
+  <!-- Gold dot -->
+  <text x="154" y="68"
+        font-family="'Bebas Neue', Impact, 'Arial Narrow', sans-serif"
+        font-size="60" fill="#C8820A" filter="url(#glow)">.</text>
+
+  <!-- PERMISSION -->
+  <text x="168" y="68"
+        font-family="'Bebas Neue', Impact, 'Arial Narrow', sans-serif"
+        font-size="60" letter-spacing="2" fill="#F8F4EE">PERMISSION</text>
+
+  <!-- Subtitle -->
+  <text x="77" y="84"
+        font-family="'Inter', 'Helvetica Neue', Arial, sans-serif"
+        font-size="10.5" font-weight="300" letter-spacing="8" fill="#8A7A6A">PODCAST</text>
+</svg>
