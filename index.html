@@ -179,6 +179,7 @@
       height: 100%;
       pointer-events: none;
       z-index: 0;
+      mix-blend-mode: screen;
     }
 
     /* Soft base glow — very faint warm light at bottom edge */
@@ -685,7 +686,7 @@
         <div class="overview-left reveal">
           <span class="eyebrow">About the Show</span>
           <span class="rule"></span>
-          <h2>Intimate.<br>Unfiltered.<br>Not Yet<br>Unfinished.</h2>
+          <h2>Intimate.<br>Unfiltered.<br>Stories Being Written.</h2>
           <span class="overview-pull">
             The Founders Nobody Saw Coming.<br>
             That Everyone Will Know.
@@ -726,29 +727,29 @@
         <div class="diff-row">
           <div class="diff-num">01</div>
           <div class="diff-text">
+            <div class="diff-heading">Not "How I Built This"</div>
+            <div class="diff-body">No polished retrospectives with a decade of hindsight. These guests are still in the middle of it — the wins are real, the stakes are live, and nobody's edited out the hard parts yet.</div>
+          </div>
+        </div>
+        <div class="diff-row">
+          <div class="diff-num">02</div>
+          <div class="diff-text">
             <div class="diff-heading">Not a Show About Hustle Culture</div>
             <div class="diff-body">This isn't about grinding harder or the 5am routine. It's about personal belief and that leap of faith. Founders who heard 'no', but decided to do it anyway.</div>
           </div>
         </div>
         <div class="diff-row">
-          <div class="diff-num">02</div>
+          <div class="diff-num">03</div>
           <div class="diff-text">
             <div class="diff-heading">While the Story Is Being Written</div>
             <div class="diff-body">Most founder stories start from the exit, the big win. We capture it in real time, as it's happening. The traction is real, the future is open, and you're hearing it before anyone decides they're right.</div>
           </div>
         </div>
         <div class="diff-row">
-          <div class="diff-num">03</div>
+          <div class="diff-num">04</div>
           <div class="diff-text">
             <div class="diff-heading">The Next Big Thing. Before It's Big.</div>
             <div class="diff-body">These aren't founders that have made it. They're the ones building the next big thing while the world is still figuring out if they're allowed to. They're early, but they're proving everyone that they're on to something.</div>
-          </div>
-        </div>
-        <div class="diff-row">
-          <div class="diff-num">04</div>
-          <div class="diff-text">
-            <div class="diff-heading">Not "How I Built This"</div>
-            <div class="diff-body">No polished retrospectives with a decade of hindsight. These guests are still in the middle of it — the wins are real, the stakes are live, and nobody's edited out the hard parts yet.</div>
           </div>
         </div>
       </div>
@@ -880,14 +881,15 @@
         return {
           x:  Math.random() * W,
           y:  Math.random() * H,
-          r:  Math.random() * 1.4 + 0.3,
-          // ~10% faster initial velocities
+          r:  Math.random() * 3 + 1.5,          // 1.5–4.5 px core (was 0.3–1.7)
           vx: (Math.random() - 0.5) * 0.165,
           vy: (Math.random() - 0.5) * 0.11 - 0.028,
           phase:  Math.random() * Math.PI * 2,
-          // ~10% faster phase cycling
           pSpeed: 0.0033 + Math.random() * 0.0055,
-          base:   0.07  + Math.random() * 0.22,
+          base:   0.2  + Math.random() * 0.35,  // 0.2–0.55 opacity (was 0.07–0.29)
+          shimmer:       0,
+          shimmerTarget: 0,
+          shimmerTimer:  Math.random() * 300,
           c,
         };
       }
@@ -902,26 +904,46 @@
       function tick() {
         ctx.clearRect(0, 0, W, H);
         for (const p of pts) {
-          // Larger Brownian nudge = more wandering area
+          // Brownian motion
           p.vx += (Math.random() - 0.5) * 0.038;
           p.vy += (Math.random() - 0.5) * 0.038;
-          // Slightly less damping so particles drift further
           p.vx *= 0.978;
           p.vy *= 0.978;
           p.x  += p.vx;
           p.y  += p.vy;
           p.phase += p.pSpeed;
-          // Breathe opacity
-          const a = p.base + Math.abs(Math.sin(p.phase)) * 0.2;
+
+          // Shimmer: particles occasionally flash briefly then fade
+          p.shimmerTimer--;
+          if (p.shimmerTimer <= 0) {
+            if (Math.random() < 0.35) p.shimmerTarget = Math.random() * 0.7 + 0.3;
+            p.shimmerTimer = 80 + Math.random() * 260;
+          }
+          p.shimmer       += (p.shimmerTarget - p.shimmer) * 0.06;
+          p.shimmerTarget *= 0.97; // naturally decay back to 0
+
+          // Opacity: breathe + shimmer boost
+          const breathe = p.base + Math.abs(Math.sin(p.phase)) * 0.2;
+          const a = Math.min(breathe + p.shimmer * 0.45, 0.92);
+
+          // Radius grows slightly during shimmer
+          const drawR = p.r * (1 + p.shimmer * 1.1);
+
           // Edge wrap
           if (p.x < -4) p.x = W + 4;
           if (p.x > W + 4) p.x = -4;
           if (p.y < -4) p.y = H + 4;
           if (p.y > H + 4) p.y = -4;
-          // Draw
+
+          // Draw: soft radial glow — tight bright core, feathered halo
+          const haloR = drawR * (5 + p.shimmer * 4);
+          const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, haloR);
+          grad.addColorStop(0,   `rgba(${p.c[0]},${p.c[1]},${p.c[2]},${a.toFixed(3)})`);
+          grad.addColorStop(0.3, `rgba(${p.c[0]},${p.c[1]},${p.c[2]},${(a * 0.45).toFixed(3)})`);
+          grad.addColorStop(1,   `rgba(${p.c[0]},${p.c[1]},${p.c[2]},0)`);
           ctx.beginPath();
-          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(${p.c[0]},${p.c[1]},${p.c[2]},${a.toFixed(3)})`;
+          ctx.arc(p.x, p.y, haloR, 0, Math.PI * 2);
+          ctx.fillStyle = grad;
           ctx.fill();
         }
         requestAnimationFrame(tick);
