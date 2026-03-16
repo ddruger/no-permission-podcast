@@ -179,6 +179,7 @@
       height: 100%;
       pointer-events: none;
       z-index: 0;
+      mix-blend-mode: screen;
     }
 
     /* Soft base glow — very faint warm light at bottom edge */
@@ -685,7 +686,7 @@
         <div class="overview-left reveal">
           <span class="eyebrow">About the Show</span>
           <span class="rule"></span>
-          <h2>Intimate.<br>Unfiltered.<br>Not Yet<br>Unfinished.</h2>
+          <h2>Intimate.<br>Unfiltered.<br>Stories Being Written.</h2>
           <span class="overview-pull">
             The Founders Nobody Saw Coming.<br>
             That Everyone Will Know.
@@ -880,12 +881,12 @@
         return {
           x:  Math.random() * W,
           y:  Math.random() * H,
-          r:  Math.random() * 1.4 + 0.3,
+          r:  Math.random() * 3 + 1.5,          // 1.5–4.5 px core (was 0.3–1.7)
           vx: (Math.random() - 0.5) * 0.165,
           vy: (Math.random() - 0.5) * 0.11 - 0.028,
           phase:  Math.random() * Math.PI * 2,
           pSpeed: 0.0033 + Math.random() * 0.0055,
-          base:   0.07  + Math.random() * 0.22,
+          base:   0.2  + Math.random() * 0.35,  // 0.2–0.55 opacity (was 0.07–0.29)
           shimmer:       0,
           shimmerTarget: 0,
           shimmerTimer:  Math.random() * 300,
@@ -935,7 +936,7 @@
           if (p.y > H + 4) p.y = -4;
 
           // Draw: soft radial glow — tight bright core, feathered halo
-          const haloR = drawR * (3 + p.shimmer * 3.5);
+          const haloR = drawR * (5 + p.shimmer * 4);
           const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, haloR);
           grad.addColorStop(0,   `rgba(${p.c[0]},${p.c[1]},${p.c[2]},${a.toFixed(3)})`);
           grad.addColorStop(0.3, `rgba(${p.c[0]},${p.c[1]},${p.c[2]},${(a * 0.45).toFixed(3)})`);
