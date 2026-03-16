@@ -333,15 +333,15 @@
     }
 
     .overview-right p {
-      font-size: clamp(12px, 1.1vw, 13.5px);
-      line-height: 1.6;
+      font-size: clamp(13px, 1.2vw, 14.5px);
+      line-height: 1.65;
       color: var(--text);
     }
-    .overview-right p + p { margin-top: 8px; }
+    .overview-right p + p { margin-top: 10px; }
 
     .overview-right p.muted {
       color: var(--text-mid);
-      font-size: clamp(11.5px, 1.05vw, 13px);
+      font-size: clamp(12.5px, 1.15vw, 14px);
     }
 
     .differentiators {
@@ -883,7 +883,7 @@
         return {
           x:  Math.random() * W,
           y:  Math.random() * H,
-          r:  Math.random() * 0.6 + 0.15,          // 0.15–0.75 px core — fine dust
+          r:  Math.random() * 0.66 + 0.165,          // 0.165–0.825 px core (~10% bigger)
           vx: (Math.random() - 0.5) * 0.14,
           vy: (Math.random() - 0.5) * 0.09 - 0.022,
           phase:  Math.random() * Math.PI * 2,
