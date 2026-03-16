@@ -881,12 +881,12 @@
         return {
           x:  Math.random() * W,
           y:  Math.random() * H,
-          r:  Math.random() * 3 + 1.5,          // 1.5–4.5 px core (was 0.3–1.7)
+          r:  Math.random() * 1.4 + 0.3,          // 0.3–1.7 px core
           vx: (Math.random() - 0.5) * 0.165,
           vy: (Math.random() - 0.5) * 0.11 - 0.028,
           phase:  Math.random() * Math.PI * 2,
           pSpeed: 0.0033 + Math.random() * 0.0055,
-          base:   0.2  + Math.random() * 0.35,  // 0.2–0.55 opacity (was 0.07–0.29)
+          base:   0.07 + Math.random() * 0.22,  // 0.07–0.29 opacity
           shimmer:       0,
           shimmerTarget: 0,
           shimmerTimer:  Math.random() * 300,
