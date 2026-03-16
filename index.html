@@ -297,7 +297,7 @@
       background: var(--bg-raised);
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
-      padding: var(--section-pad) 0;
+      padding: clamp(60px, 7vw, 100px) 0;
     }
 
     .overview-grid {
@@ -333,15 +333,15 @@
     }
 
     .overview-right p {
-      font-size: clamp(13px, 1.3vw, 15px);
-      line-height: 1.7;
+      font-size: clamp(12px, 1.1vw, 13.5px);
+      line-height: 1.6;
       color: var(--text);
     }
-    .overview-right p + p { margin-top: 14px; }
+    .overview-right p + p { margin-top: 8px; }
 
     .overview-right p.muted {
       color: var(--text-mid);
-      font-size: clamp(12px, 1.2vw, 14px);
+      font-size: clamp(11.5px, 1.05vw, 13px);
     }
 
     .differentiators {
@@ -711,7 +711,7 @@
             built. They didn't ask. They built anyway. The company is real. The
             traction is there. And the story isn't finished yet.
           </p>
-          <p class="muted" style="margin-top:16px; border-left: 2px solid var(--border-gold); padding-left: 20px; font-style: italic;">
+          <p class="muted" style="margin-top:10px; border-left: 2px solid var(--border-gold); padding-left: 16px; font-style: italic;">
             "I've invested in founders like this. I've heard their stories, the challenges
             they faced, and how often they were written off. To then be right anyway.
             No Permission exists to tell their stories and document that moment before
@@ -858,9 +858,11 @@
       const ctx = canvas.getContext('2d');
 
       const COLORS = [
-        [200, 130, 10],  // gold
-        [200,  74, 10],  // rust
-        [192, 160, 96],  // pale-gold
+        [220, 160,  20],  // amber-gold
+        [212, 140,  10],  // deep gold
+        [200, 130,  10],  // gold
+        [230, 190,  60],  // light amber
+        [200, 120,   5],  // warm gold
       ];
 
       let W, H, pts, dpr;
@@ -881,12 +883,12 @@
         return {
           x:  Math.random() * W,
           y:  Math.random() * H,
-          r:  Math.random() * 1.4 + 0.3,          // 0.3–1.7 px core
-          vx: (Math.random() - 0.5) * 0.165,
-          vy: (Math.random() - 0.5) * 0.11 - 0.028,
+          r:  Math.random() * 0.6 + 0.15,          // 0.15–0.75 px core — fine dust
+          vx: (Math.random() - 0.5) * 0.14,
+          vy: (Math.random() - 0.5) * 0.09 - 0.022,
           phase:  Math.random() * Math.PI * 2,
           pSpeed: 0.0033 + Math.random() * 0.0055,
-          base:   0.07 + Math.random() * 0.22,  // 0.07–0.29 opacity
+          base:   0.12 + Math.random() * 0.28,  // 0.12–0.40 opacity — brighter dust motes
           shimmer:       0,
           shimmerTarget: 0,
           shimmerTimer:  Math.random() * 300,
@@ -897,7 +899,7 @@
       function init() {
         resize();
         // Fewer particles on mobile for performance
-        const count = isMobile() ? 70 : 140;
+        const count = isMobile() ? 120 : 240;
         pts = Array.from({ length: count }, mkPt);
       }
 
@@ -927,7 +929,7 @@
           const a = Math.min(breathe + p.shimmer * 0.45, 0.92);
 
           // Radius grows slightly during shimmer
-          const drawR = p.r * (1 + p.shimmer * 1.1);
+          const drawR = p.r * (1 + p.shimmer * 0.8);
 
           // Edge wrap
           if (p.x < -4) p.x = W + 4;
@@ -936,7 +938,7 @@
           if (p.y > H + 4) p.y = -4;
 
           // Draw: soft radial glow — tight bright core, feathered halo
-          const haloR = drawR * (5 + p.shimmer * 4);
+          const haloR = drawR * (3 + p.shimmer * 2.5);
           const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, haloR);
           grad.addColorStop(0,   `rgba(${p.c[0]},${p.c[1]},${p.c[2]},${a.toFixed(3)})`);
           grad.addColorStop(0.3, `rgba(${p.c[0]},${p.c[1]},${p.c[2]},${(a * 0.45).toFixed(3)})`);
