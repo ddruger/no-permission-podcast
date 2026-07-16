@@ -804,11 +804,34 @@
 
   <!-- NAV -->
   <nav>
-    <div class="nav-logo">NO<span>.</span>PERMISSION</div>
+    <div class="nav-logo">
+      <svg viewBox="0 0 202 26" height="26" xmlns="http://www.w3.org/2000/svg" aria-label="No Permission Podcast" role="img" style="display:block;">
+        <defs>
+          <linearGradient id="ng" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#C8820A"/>
+            <stop offset="100%" stop-color="#C84A0A"/>
+          </linearGradient>
+        </defs>
+        <!-- Mic capsule (pill) -->
+        <rect x="0" y="0" width="11" height="17" rx="5.5" fill="none" stroke="url(#ng)" stroke-width="1.6"/>
+        <!-- Head fill -->
+        <rect x="2.5" y="2.5" width="6" height="6" rx="3" fill="#C8820A" opacity="0.6"/>
+        <!-- Stem -->
+        <line x1="5.5" y1="17" x2="5.5" y2="22" stroke="#C8820A" stroke-width="1.6" stroke-linecap="round"/>
+        <!-- Base -->
+        <line x1="0" y1="22" x2="11" y2="22" stroke="url(#ng)" stroke-width="2" stroke-linecap="round"/>
+        <!-- NO -->
+        <text x="19" y="20" font-family="'Bebas Neue', Impact, sans-serif" font-size="22" letter-spacing="1" fill="#F8F4EE">NO</text>
+        <!-- Gold dot -->
+        <text x="48" y="20" font-family="'Bebas Neue', Impact, sans-serif" font-size="22" fill="#C8820A">.</text>
+        <!-- PERMISSION -->
+        <text x="57" y="20" font-family="'Bebas Neue', Impact, sans-serif" font-size="22" letter-spacing="1" fill="#F8F4EE">PERMISSION</text>
+      </svg>
+    </div>
     <ul class="nav-links">
       <li><a href="#hero">Home</a></li>
       <li><a href="#overview">About</a></li>
-      <li><a href="#expect">Season 1</a></li>
+      <li><a href="#expect">The Show</a></li>
     </ul>
     <a href="mailto:daniel@nopermissionpodcast.com" class="nav-cta">Get in Touch</a>
     <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle menu" aria-expanded="false">
@@ -826,14 +849,14 @@
     <div class="hero-glow"></div>
 
     <div class="container hero-inner">
-      <div class="hero-label">Summer 2026</div>
+      <div class="hero-label">Now Playing</div>
       <h1 class="hero-title">NO PERMISSION</h1>
       <p class="hero-tagline">The Business Podcast Featuring The Next Generation of Builders.</p>
       <p class="hero-sub">
-        Raw, honest, conversations with the next generation of builders. All current students or recent graduates, and none that asked the world for permission.
+        Raw, honest conversations with founders who built anyway. Across CPG, ecommerce, software, mobile, and more — none of whom asked the world for permission.
       </p>
       <div class="hero-actions">
-        <a href="#expect" class="btn-primary">Explore Season 1</a>
+        <a href="#expect" class="btn-primary">Explore the Show</a>
         <a href="#overview" class="btn-ghost">About the Show</a>
       </div>
     </div>
@@ -930,16 +953,16 @@
     <div class="container">
 
       <div class="expect-header reveal">
-        <span class="eyebrow">Summer 2026</span>
+        <span class="eyebrow">Season 1</span>
         <span class="rule" style="margin: 0 auto 28px;"></span>
-        <h2>No Permission:<br>Season 1</h2>
+        <h2>No Permission:<br>The Show</h2>
       </div>
 
       <div class="expect-facts stagger">
         <div class="fact-card">
-          <div class="fact-number">10</div>
-          <div class="fact-label">Episodes</div>
-          <div class="fact-sub">New episodes released every week, over ten weeks.</div>
+          <div class="fact-number" style="font-size: clamp(36px, 5vw, 60px); line-height: 1.1;">Weekly</div>
+          <div class="fact-label">New Episodes</div>
+          <div class="fact-sub">New episodes drop every week. No industry is off limits.</div>
         </div>
         <div class="fact-card">
           <div class="fact-number" style="color: var(--rust);">Video</div>
@@ -947,14 +970,14 @@
           <div class="fact-sub">Full video interviews — not a talking-head clip show. Long-form, real conversation.</div>
         </div>
         <div class="fact-card">
-          <div class="fact-number">USC</div>
-          <div class="fact-label">Season 1 Founders</div>
-          <div class="fact-sub">Current students and recent alumni. Built while everyone else was choosing a major.</div>
+          <div class="fact-number" style="font-size: clamp(28px, 3.5vw, 48px); line-height: 1.15;">Any<br>Industry</div>
+          <div class="fact-label">No Industry Off Limits</div>
+          <div class="fact-sub">CPG, ecommerce, software, mobile, and more. If they built it without permission, we want to hear it.</div>
         </div>
         <div class="fact-card">
           <div class="fact-number" style="font-size: clamp(56px, 8vw, 96px);">30</div>
-          <div class="fact-label">Minutes per episode</div>
-          <div class="fact-sub">No padding. No filler. Authentic conversations, personal stories, and real value.</div>
+          <div class="fact-label">Minutes Max Per Episode</div>
+          <div class="fact-sub">No padding. No filler. Tight, honest conversations that respect your time.</div>
         </div>
       </div>
 
@@ -962,10 +985,10 @@
         <div class="detail-block">
           <h3>Who You'll<br>Meet</h3>
           <ul>
-            <li><strong>USC students</strong> building companies while in class</li>
-            <li><strong>Recent alumni</strong> who didn't wait for a title or permission</li>
+            <li>Founders across <strong>CPG, ecommerce, software, mobile, and more</strong></li>
+            <li>Builders who moved <strong>before the world said they could</strong></li>
             <li>Founders with <strong>real revenue and real users,</strong> not just a pitch deck</li>
-            <li>People whose stories <strong>aren't finished yet</strong> and that's why they matter now</li>
+            <li>People whose stories <strong>aren't finished yet</strong> — and that's why they matter now</li>
             <li>The ones that were told no, but built it anyway</li>
           </ul>
         </div>
@@ -986,7 +1009,7 @@
           <h3>Get in Touch</h3>
           <p>
             Know a founder who built something real without asking permission?
-            Want to be a guest on Season 2, partner with the show, or just reach out?
+            Want to be a guest, partner with the show, or just reach out?
             We want to hear from you.
           </p>
         </div>
@@ -1008,7 +1031,7 @@
         <ul class="footer-links">
           <li><a href="#hero">Home</a></li>
           <li><a href="#overview">About</a></li>
-          <li><a href="#expect">Season 1</a></li>
+          <li><a href="#expect">The Show</a></li>
           <li><a href="mailto:daniel@nopermissionpodcast.com">Contact</a></li>
         </ul>
         <p class="footer-copy">&copy; 2026 No Permission Podcast. All rights reserved.</p>
